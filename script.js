@@ -32,6 +32,7 @@ class Model{
       }
     })
     this.displayTasks(this.tasks)
+    console.log(this.tasks)
   }
 }
 
@@ -94,7 +95,6 @@ class View {
     this.taskList.addEventListener('click', event => {
       if(event.target.textContent === 'Delete'){
         handler(event.target.parentElement.id);
-        event.target.parentElement.remove();
       }
     })
   }
