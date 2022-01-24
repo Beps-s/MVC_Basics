@@ -23,8 +23,15 @@ class Model{
   taskListChange(callBack){
     this.displayTasks = callBack;
   }
-  checkboxComplete(){
-
+  deleteTask(taskId){
+    const taskList = this.tasks
+    this.tasks = []
+    taskList.forEach(task => {
+      if(task.id != taskId){
+        this.addTask(task.text)
+      }
+    })
+    this.displayTasks(this.tasks)
   }
 }
 
@@ -86,6 +93,7 @@ class View {
   deleteTask(handler){
     this.taskList.addEventListener('click', event => {
       if(event.target.textContent === 'Delete'){
+        handler(event.target.parentElement.id);
         event.target.parentElement.remove();
       }
     })
@@ -125,7 +133,7 @@ class Controller{
     this.model.addTask(taskText);
   }
   handleDeleteTask = task => {
-    this.view.deleteTask(task);
+    this.model.deleteTask(task);
   }
 }
 
