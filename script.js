@@ -23,6 +23,9 @@ class Model{
   taskListChange(callBack){
     this.displayTasks = callBack;
   }
+  checkboxComplete(){
+
+  }
 }
 
 class View {
@@ -80,6 +83,13 @@ class View {
       }
     })
   }
+  deleteTask(handler){
+    this.taskList.addEventListener('click', event => {
+      if(event.target.textContent === 'Delete'){
+        event.target.parentElement.remove();
+      }
+    })
+  }
   get _taskText(){
     return this.input.value
   }
@@ -106,12 +116,16 @@ class Controller{
     this.model.taskListChange(this.displayTasks);
     this.view.addTask(this.handleAddTask);
     this.displayTasks(this.model.tasks);
+    this.view.deleteTask(this.handleDeleteTask);
   }
   displayTasks = tasks => {
     this.view.displayTasks(tasks);
   }
   handleAddTask = taskText => {
     this.model.addTask(taskText);
+  }
+  handleDeleteTask = task => {
+    this.view.deleteTask(task);
   }
 }
 
